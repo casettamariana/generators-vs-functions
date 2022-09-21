@@ -29,4 +29,20 @@ async function processDbData() {
     return responses
 }
 
-console.table(await processDbData())
+// console.table(await processDbData())
+
+async function* processDbDataGenerator() {
+    const products = await myDB()
+
+    for(const product of products) {
+        const { data: productInfo } = await axios.get(`${PRODUCTS_URL}?productName=${product}`)
+        const { data: cartData } = await axios.post(CART_URL, productInfo)
+
+        yield cartData
+
+    }
+}
+
+for await (const data of processDbDataGenerator()) {
+    console.table(data);
+}
