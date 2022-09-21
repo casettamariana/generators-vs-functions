@@ -22,8 +22,7 @@ async function processDbData() {
 
         responses.push(cartData)
 
-        // console.log('productInfo: ', productInfo);
-        // console.log('cartInfo: ', cartData);
+        console.log('productInfo: ', productInfo);
     }
 
     return responses
